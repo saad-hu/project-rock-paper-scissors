@@ -6,9 +6,6 @@ function computerPlay() {
     return options[rand_num];
 }
 
-console.log(computerPlay());
-
-
 //this function asks the user for their choice and returns the choice. asks the user untill their choice is correct. also this function lowercases their choice
 function userChoice() {
 
@@ -31,4 +28,50 @@ function userChoice() {
     while(user_input == 0);
 }
 
-console.log(userChoice())
+//this function plays ONE round, and RETURNS(not print) the winner of the round. returns tie if computer and user choice are same
+function playRound(computerChoice, userChoice) {
+
+    if(computerChoice == userChoice)
+    {
+        return "tie";
+    }
+
+    else if (computerChoice == "rock")
+    {
+        if (userChoice == "scissors")
+        {
+            return "computer";
+        }
+        else {
+            return "user";
+        }
+    }
+    else if (computerChoice == "paper")
+    {
+        if (userChoice == "rock") {
+            return "computer";
+        }
+        else
+        {
+            return "user";
+        }
+    }
+    else if (computerChoice == "scissors")
+    {
+        if(userChoice == "paper")
+        {
+            return "computer";
+        }
+        else 
+        {
+            return "user";
+        }
+    }
+}
+
+computerSelection = computerPlay();
+userSelection = userChoice();
+
+console.log(computerSelection)
+console.log(userSelection)
+console.log(playRound(computerSelection, userSelection))
