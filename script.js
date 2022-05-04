@@ -7,3 +7,28 @@ function computerPlay() {
 }
 
 console.log(computerPlay());
+
+
+//this function asks the user for their choice and returns the choice. asks the user untill their choice is correct. also this function lowercases their choice
+function userChoice() {
+
+    let user_input;
+
+    //using do while loop, if the user does not enter one of the three choices, this loop will alert the user and then ask for an input again untill the choice is correct. 
+    do {
+        user_input = prompt("Enter your selection (rock, paper, scissors)");
+        user_input = user_input.toLowerCase(); //converts user string to lowercase to maintain consistency
+
+        if (user_input != "rock" && user_input != "paper" && user_input != "scissors") //if user entered wrong choice
+        {
+            alert("Please enter correct choice!");
+            user_input = 0;
+        }
+        else {
+            return user_input;
+        }
+    }
+    while(user_input == 0);
+}
+
+console.log(userChoice())
