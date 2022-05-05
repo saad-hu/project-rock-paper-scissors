@@ -69,9 +69,54 @@ function playRound(computerChoice, userChoice) {
     }
 }
 
-computerSelection = computerPlay();
-userSelection = userChoice();
 
-console.log(computerSelection)
-console.log(userSelection)
-console.log(playRound(computerSelection, userSelection))
+//this function simulates a 5 round game and keeps track of who as won each round. if a round is tie, 1 point goes to each player. 
+function game() 
+{
+    let computerSelection, userSelection, roundWinner, computerWins = 0, userWins = 0;
+    for (let i = 0; i < 5; i++) //5 round game 
+    {   
+        computerSelection = computerPlay(); //stores computer choice. changes for each round
+        userSelection = userChoice(); //stores user choice. changes for each round
+        console.log(`Computer: ${computerSelection}`);
+        console.log(`You: ${userSelection}`);
+        roundWinner = playRound(computerSelection, userSelection); //stores the winner of the current round
+
+        //these if else statements give points and display the results of each round
+        if(roundWinner == "tie")
+        {
+            computerWins++;
+            userWins++;
+            console.log(`Round ${i+1}: It's a tie! 1 point goes to each player!`);
+        }
+        else if(roundWinner == "computer")
+        {
+            computerWins++;
+            console.log(`Round ${i+1}: You Lose! ${computerSelection} beats ${userSelection}`);
+        }
+        else
+        {
+            userWins++;
+            console.log(`Round ${i+1}: You Won! ${userSelection} beats ${computerSelection}`);
+        }
+    }
+
+    //displays the final score of the whole game
+    console.log(`Computer Score: ${computerWins}`); 
+    console.log(`Your Score: ${userWins}`);
+
+    if(computerWins == userWins)
+    {
+        console.log(`Game Result: It's a tie! Very rare.`);
+    }
+    else if(computerWins > userWins)
+    {
+        console.log(`Game Result: You lost the game!`);
+    }
+    else
+    {
+        console.log(`Game Result: You won the game!`);
+    }
+}
+
+game();
