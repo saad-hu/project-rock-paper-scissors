@@ -1,4 +1,4 @@
-// this function randomply outputs rock paper or scissors
+// this function randomly returns rock paper or scissors
 function computerPlay() {
     let options = ["rock", "paper", "scissors"]; //declaring an array with the options
 
@@ -6,12 +6,12 @@ function computerPlay() {
     return options[rand_num];
 }
 
-//this function asks the user for their choice and returns the choice. asks the user untill their choice is correct. also this function lowercases their choice
+//this function asks the user for their choice and returns the choice. asks the user until their choice is correct. also this function lowercases their choice
 function userChoice() {
 
     let user_input;
 
-    //using do while loop, if the user does not enter one of the three choices, this loop will alert the user and then ask for an input again untill the choice is correct. 
+    //using do while loop, if the user does not enter one of the three choices, this loop will alert the user and then ask for an input again until the choice is correct. 
     do {
         user_input = prompt("Enter your selection (rock, paper, scissors)");
         user_input = user_input.toLowerCase(); //converts user string to lowercase to maintain consistency
