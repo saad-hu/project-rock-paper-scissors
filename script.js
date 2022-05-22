@@ -70,11 +70,11 @@ function playRound(computerChoice, userChoice) {
 }
 
 
-//this function simulates a 5 round game and keeps track of who as won each round. if a round is tie, 1 point goes to each player. 
+//this function simulates a 5 round game and keeps track of who as won each round. if a round is tie, no point is awarded to each player. 
 function game() 
 {
-    let computerSelection, userSelection, roundWinner, computerWins = 0, userWins = 0;
-    for (let i = 0; i < 5; i++) //5 round game 
+    let computerSelection, userSelection, roundWinner, computerWins = 0, userWins = 0, roundCount = 1;
+    while( (computerWins != 5) && (userWins != 5)) //5 round game 
     {   
         computerSelection = computerPlay(); //stores computer choice. changes for each round
         userSelection = userChoice(); //stores user choice. changes for each round
@@ -85,19 +85,20 @@ function game()
         //these if else statements give points and display the results of each round
         if(roundWinner == "tie")
         {
-            computerWins++;
-            userWins++;
-            console.log(`Round ${i+1}: It's a tie! 1 point goes to each player!`);
+            console.log(`Round ${roundCount}: It's a tie! No point awarded.`);
+            roundCount++;
         }
         else if(roundWinner == "computer")
         {
             computerWins++;
-            console.log(`Round ${i+1}: You Lose! ${computerSelection} beats ${userSelection}`);
+            console.log(`Round ${roundCount}: You Lose! ${computerSelection} beats ${userSelection}`);
+            roundCount++;
         }
         else
         {
             userWins++;
-            console.log(`Round ${i+1}: You Won! ${userSelection} beats ${computerSelection}`);
+            console.log(`Round ${roundCount}: You Won! ${userSelection} beats ${computerSelection}`);
+            roundCount++;
         }
     }
 
@@ -105,11 +106,7 @@ function game()
     console.log(`Computer Score: ${computerWins}`); 
     console.log(`Your Score: ${userWins}`);
 
-    if(computerWins == userWins)
-    {
-        console.log(`Game Result: It's a tie! Very rare.`);
-    }
-    else if(computerWins > userWins)
+    if(computerWins > userWins)
     {
         console.log(`Game Result: You lost the game!`);
     }
