@@ -6,53 +6,98 @@ function computerPlay() {
     return options[rand_num];
 }
 
+
+//these two variables are the counter for number of wins. These are gobal because these variables will be used in the checkWinner() function as well
+let userWins = 0;
+let computerWins = 0;
+
+
+//reference to card images nodes. These are global because these references are used by both playRound() and checkWinner() function 
+const userCardImg = document.querySelector('#user-card img');
+const computerCardImg = document.querySelector('#computer-card img');
+
+
 //this function plays ONE round, and RETURNS(not print) the winner of the round. returns tie if computer and user choice are same
 function playRound(computerChoice, userChoice) {
 
+    let roundWinner;
+
+    //these set of if else statements are the logic of rock paper scissors I have implemented. The important note is that the winner (user, computer or tie) is stored in the variable roundWinner as a string
     if(computerChoice == userChoice)
     {
-        return "tie";
+        roundWinner = "tie";
     }
-
     else if (computerChoice == "rock")
     {
         if (userChoice == "scissors")
         {
-            return "computer";
+            roundWinner = "computer";
         }
         else {
-            return "user";
+            roundWinner = "user";
         }
     }
     else if (computerChoice == "paper")
     {
         if (userChoice == "rock") {
-            return "computer";
+            roundWinner = "computer";
         }
         else
         {
-            return "user";
+            roundWinner = "user";
         }
     }
     else if (computerChoice == "scissors")
     {
         if(userChoice == "paper")
         {
-            return "computer";
+            roundWinner = "computer";
         }
         else 
         {
-            return "user";
+            roundWinner = "user";
         }
     }
+
+    //now the round winner is decided, we will change the images in the user and computer card according to selection, display round result, and update and show scores
+
+
+    //changing card images for each round
+    userCardImg.src = "./images/"+userChoice+"-icon-96x96.png";
+    computerCardImg.src = "./images/"+computerChoice+"-icon-96x96.png";
+
+
+    //refernce to the result section's round result paragraph
+    const roundResult = document.querySelector('#round-result');
+
+    //reference to score (span) nodes
+    const userCardScore = document.querySelector('#user-score');
+    const computerCardScore = document.querySelector('#computer-score');
+
+
+    //these if else statements store then display points and display the results of each round
+    if(roundWinner == "tie")
+    {
+        roundResult.textContent = `It's a tie! No points awarded.`;
+    }
+    else if(roundWinner == "computer")
+    {   
+        roundResult.textContent =  `You Lose! ${computerChoice
+        } beats ${userChoice}`;
+        computerWins++; //updates score
+        computerCardScore.textContent = computerWins;
+    }
+    else
+    {
+        roundResult.textContent = `You Won! ${userChoice} beats ${computerChoice}`;
+        userWins++; //updates score
+        userCardScore.textContent = userWins;
+    }
+
+    return roundWinner;
 }
 
 
-let userSelection; 
-let computerSelection;
-let roundCount = 1;
-let userWins = 0;
-let computerWins = 0;
 
 const icons = document.querySelectorAll('.icon-box');  //creates a node list of all the (3) icon-box 
 
@@ -60,100 +105,54 @@ const icons = document.querySelectorAll('.icon-box');  //creates a node list of 
 icons.forEach((icon) => {
     icon.addEventListener('click', () => {
 
-        userSelection = icon.getAttribute('id');   //the id of each icon-box is the name of the selection (rock, paper, or scissors). So we can check what the user has selected by checking the id of the icon-box
-        computerSelection = computerPlay();
-
-        let roundWinner = playRound(computerSelection, userSelection);
-
-        //reference to card images nodes
-        const userCardImg = document.querySelector('#user-card img');
-        const computerCardImg = document.querySelector('#computer-card img');
-
-        //changing card images for each round
-        userCardImg.src = "./images/"+userSelection+"-icon-96x96.png";
-        computerCardImg.src = "./images/"+computerSelection+"-icon-96x96.png";
-
-        //refernce to the result's section round result paragraph
-        const roundResult = document.querySelector('#round-result');
-
-        //reference to score (span) nodes
-        const userCardScore = document.querySelector('#user-score');
-        const computerCardScore = document.querySelector('#computer-score');
-
-        //these if else statements give points and display the results of each round
-        if(roundWinner == "tie")
+        if ((userWins < 3) && (computerWins < 3)) //when the game has won, this condition prevents more rounds to be played when the icons are clicked 
         {
-            roundResult.textContent = `It's a tie! No points awarded.`;
+            let userSelection = icon.getAttribute('id');   //the id of each icon-box is the name of the selection (rock, paper, or scissors). So we can check what the user has selected by checking the id of the icon-box
+            let computerSelection = computerPlay();
+    
+            let winnerOfRound = playRound(computerSelection, userSelection);
+            
+            checkWinner(winnerOfRound);
         }
-        else if(roundWinner == "computer")
-        {   
-            roundResult.textContent =  `You Lose! ${computerSelection} beats ${userSelection}`;
-            computerWins++;
-            computerCardScore.textContent = computerWins;
-        }
-        else
-        {
-            roundResult.textContent = `You Won! ${userSelection} beats ${computerSelection}`;
-            userWins++;
-            userCardScore.textContent = userWins;
-        }
-
-
     })
 })
 
 
 
+function checkWinner()
+{   
+    //first I will be creating (not adding to DOM) elements for final result and game over image to display in the result section
+    const finalResult = document.createElement('p');
+    finalResult.classList.add('final-result');
 
+    const finalImage = document.createElement('img');
+    finalImage.classList.add('game-over-image');
 
+    //reference to the results div section so that I can add the above two elements to it
+    const resultsSection = document.querySelector('#results');
 
+    if(userWins == 3)
+    {   
+        finalImage.src = "./images/game-over-128x128.png";
+        finalResult.textContent = "You've Won the Game! Congratulation!";
 
+        userCardImg.src = "./images/winner-128x128.png";
+        computerCardImg.src = "./images/loser-128x128.png";
 
+        resultsSection.prepend(finalImage);
+        resultsSection.prepend(finalResult);
+    }
 
-//this function simulates a 5 round game and keeps track of who as won each round. if a round is tie, no point is awarded to each player. 
-// function game() 
-// {
-//     let computerSelection, userSelection, roundWinner, computerWins = 0, userWins = 0, roundCount = 1;
-//     while( (computerWins != 5) && (userWins != 5)) //5 round game 
-//     {   
-//         computerSelection = computerPlay(); //stores computer choice. changes for each round
-//         userSelection = userChoice(); //stores user choice. changes for each round
-//         console.log(`Computer: ${computerSelection}`);
-//         console.log(`You: ${userSelection}`);
-//         roundWinner = playRound(computerSelection, userSelection); //stores the winner of the current round
+    else if(computerWins == 3)
+    {   
+        finalImage.src = "./images/game-over-128x128.png";
+        finalResult.textContent = "You've Lost the Game!";
 
-//         //these if else statements give points and display the results of each round
-//         if(roundWinner == "tie")
-//         {
-//             console.log(`Round ${roundCount}: It's a tie! No point awarded.`);
-//             roundCount++;
-//         }
-//         else if(roundWinner == "computer")
-//         {
-//             computerWins++;
-//             console.log(`Round ${roundCount}: You Lose! ${computerSelection} beats ${userSelection}`);
-//             roundCount++;
-//         }
-//         else
-//         {
-//             userWins++;
-//             console.log(`Round ${roundCount}: You Won! ${userSelection} beats ${computerSelection}`);
-//             roundCount++;
-//         }
-//     }
+        computerCardImg.src = "./images/winner-128x128.png";
+        userCardImg.src = "./images/loser-128x128.png";
 
-//     //displays the final score of the whole game
-//     console.log(`Computer Score: ${computerWins}`); 
-//     console.log(`Your Score: ${userWins}`);
+        resultsSection.prepend(finalImage);
+        resultsSection.prepend(finalResult);
+    }
+}
 
-//     if(computerWins > userWins)
-//     {
-//         console.log(`Game Result: You lost the game!`);
-//     }
-//     else
-//     {
-//         console.log(`Game Result: You won the game!`);
-//     }
-// }
-
-// game();
