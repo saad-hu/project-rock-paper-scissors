@@ -2,9 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <title>Rock, Paper, Scissors</title>
 </head>
 <body>
+    <div id="heading-section">
+        <h1 id="main-heading">Rock Paper Scissors</h1>
+    </div>
+    
+    <p class="instructions">First to score 5 points wins.</p>
+
+    <!--this section contains all the three user selection options(rock paper or scissors)-->
+    <!--the id of each icon-box is the name of the selection (rock, paper, or scissors). So we can check what the user has selected by checking the id of the icon-box-->
+    <div class="all-icons">
+        <div id="rock" class="icon-box">
+            <h3 class="icon-heading">Rock</h3>
+            <img src="./images/rock-icon-96x96.png" alt="rock hand gesture">
+        </div>
+
+        <div id="paper" class="icon-box">
+            <h3 class="icon-heading">Paper</h3>
+            <img src="./images/paper-icon-96x96.png" alt="paper hand gesture">
+        </div>
+
+        <div id="scissors" class="icon-box">
+            <h3 class="icon-heading">Scissors</h3>
+            <img src="./images/scissors-icon-96x96.png" alt="scissors hand gesture">
+        </div>
+    </div>
+
+    <div class="score-cards">
+        <div id="user-card" class="single-card">
+            <h3>You</h3>
+            <p>Score: <span id="user-score">0</span></p>
+            <img src="./images/question-mark-128x128.png"> 
+        </div>
+
+        <div id="results">
+            <p id="round-result">Select from above to start the game!</p>
+        </div>
+
+        <div id="computer-card" class="single-card">
+            <h3>Computer</h3>
+            <p>Score: <span id="computer-score">0</span></p>
+            <img src="./images/question-mark-128x128.png"> 
+        </div>
+    </div>
+
+
+
     <script src="script.js"></script>
 </body>
 </html>
