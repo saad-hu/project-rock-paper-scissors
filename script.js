@@ -7,12 +7,12 @@ function computerPlay() {
 }
 
 
-//these two variables are the counter for number of wins. These are gobal because these variables will be used in the checkWinner() function as well
+//these two variables are the counter for number of wins. These are gobal because these variables will be used in the displayWinner() function as well
 let userWins = 0;
 let computerWins = 0;
 
 
-//reference to card images nodes. These are global because these references are used by both playRound() and checkWinner() function 
+//reference to card images nodes. These are global because these references are used by both playRound() and displayWinner() function 
 const userCardImg = document.querySelector('#user-card img');
 const computerCardImg = document.querySelector('#computer-card img');
 
@@ -101,8 +101,8 @@ function playRound(computerChoice, userChoice) {
     return roundWinner;
 }
 
-
-function checkWinner()
+//displays the winner and then calls playAgain() function that gives the user an option to play again 
+function displayWinner()
 {   
     //first I will be creating (not adding to DOM) elements for final result and game over image to display in the result section
     const finalResult = document.createElement('p');
@@ -114,7 +114,7 @@ function checkWinner()
     //reference to the results div section so that I can add the above two elements to it
     const resultsSection = document.querySelector('#results');
 
-    if(userWins == 3)
+    if(userWins == 5)
     {   
         finalImage.src = "./images/game-over-128x128.png";
         finalResult.textContent = "You've Won the Game! Congratulation!";
@@ -127,7 +127,7 @@ function checkWinner()
         playAgain();
     }
 
-    else if(computerWins == 3)
+    else if(computerWins == 5)
     {   
         finalImage.src = "./images/game-over-128x128.png";
         finalResult.textContent = "You've Lost the Game!";
@@ -172,6 +172,8 @@ icons.forEach((icon) => {
 
         let winnerOfRound = playRound(computerSelection, userSelection);
         
-        checkWinner(winnerOfRound);
+        if( (userWins == 5) || (computerWins == 5)) {
+            displayWinner(winnerOfRound);
+        }
     })
 })
