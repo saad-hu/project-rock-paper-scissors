@@ -30,7 +30,9 @@ img {
 .all-icons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 50px;
+    height: 165px;
 }
 
 .icon-box {
@@ -81,7 +83,7 @@ img {
     font-weight: 600;
 }
 
-.final-result {
+.final-result {     /* this element is created in javascript */
     font-size: 22px;
     font-weight: 800;
 }
@@ -104,4 +106,22 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.play-again-button {  /* element created in javascript */
+    font-size: 25px;
+    color: white;
+    background-color: rgb(54, 54, 54);
+    border: 2px solid rgb(221, 203, 44);
+    padding: 20px 50px;
+    border-radius: 50px;
+}
+
+.play-again-button:hover {
+    font-size: 25px;
+    color: white;
+    background-color: rgb(34, 34, 34);
+    border: 2px solid rgb(221, 203, 44);
+    padding: 20px 50px;
+    border-radius: 50px;
 }

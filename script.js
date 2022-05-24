@@ -17,6 +17,10 @@ const userCardImg = document.querySelector('#user-card img');
 const computerCardImg = document.querySelector('#computer-card img');
 
 
+//used to add addEventListener to each icon box and in function playAgain 
+const icons = document.querySelectorAll('.icon-box');  //creates a node list of all the (3) icon-box
+
+
 //this function plays ONE round, and RETURNS(not print) the winner of the round. returns tie if computer and user choice are same
 function playRound(computerChoice, userChoice) {
 
@@ -136,8 +140,27 @@ function checkWinner()
 }
 
 
+//this function displays a play again button in place of the icons, and if cliked reloads the page, hence resets the game
+function playAgain()
+{   
+    //creating (not appending) play again button. It's styling is done in the stylesheet
+    const playAgainButton = document.createElement('button');
+    playAgainButton.classList.add('play-again-button');
+    playAgainButton.textContent = "Play Again?";
 
-const icons = document.querySelectorAll('.icon-box');  //creates a node list of all the (3) icon-box 
+    //hiding the icons so that I can display the reload button only in their place
+    icons.forEach((icon) => {
+        icon.style.display = "none";
+    })
+    
+
+    const allIcons = document.querySelector('.all-icons');
+    allIcons.appendChild(playAgainButton);
+
+    //when the play again button is clicked, this reloads the page, hence resets the game
+    playAgainButton.addEventListener('click', () => location.reload());
+}
+
 
 //adding an eventListener to each icon-box (user selection box)
 icons.forEach((icon) => {
@@ -155,7 +178,7 @@ icons.forEach((icon) => {
 
         else
         {
-            location.reload(); //this reloads the page, hence resets the game
+            playAgain();
         }
     })
 })
