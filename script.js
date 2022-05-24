@@ -124,6 +124,7 @@ function checkWinner()
 
         resultsSection.prepend(finalImage);
         resultsSection.prepend(finalResult);
+        playAgain();
     }
 
     else if(computerWins == 3)
@@ -136,6 +137,7 @@ function checkWinner()
 
         resultsSection.prepend(finalImage);
         resultsSection.prepend(finalResult);
+        playAgain();
     }
 }
 
@@ -164,21 +166,12 @@ function playAgain()
 
 //adding an eventListener to each icon-box (user selection box)
 icons.forEach((icon) => {
-    icon.addEventListener('click', () => {
+    icon.addEventListener('click', () => { 
+        let userSelection = icon.getAttribute('id');   //the id of each icon-box is the name of the selection (rock, paper, or scissors). So we can check what the user has selected by checking the id of the icon-box
+        let computerSelection = computerPlay();
 
-        if ((userWins < 3) && (computerWins < 3)) //when the game has won, this condition prevents more rounds to be played when the icons are clicked 
-        {
-            let userSelection = icon.getAttribute('id');   //the id of each icon-box is the name of the selection (rock, paper, or scissors). So we can check what the user has selected by checking the id of the icon-box
-            let computerSelection = computerPlay();
-    
-            let winnerOfRound = playRound(computerSelection, userSelection);
-            
-            checkWinner(winnerOfRound);
-        }
-
-        else
-        {
-            playAgain();
-        }
+        let winnerOfRound = playRound(computerSelection, userSelection);
+        
+        checkWinner(winnerOfRound);
     })
 })
