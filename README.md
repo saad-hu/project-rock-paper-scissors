@@ -9,7 +9,7 @@
 
 ![](/images/rps-1-demo.png)
 
-![](/images/rps-2-demo-2.png)
+![](/images/rps-2-demo.png)
 #### Mobile View
 ![](/images/rps-mob-demo.png)
 
