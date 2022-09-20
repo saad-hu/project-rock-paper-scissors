@@ -7,9 +7,9 @@
 #### Desktop View
 ![](/images/rps-demo.png)
 
-![](/images/rps-demo-1.png)
+![](/images/rps-1-demo.png)
 
-![](/images/rps-demo-2.png)
+![](/images/rps-2-demo-2.png)
 #### Mobile View
 ![](/images/rps-mob-demo.png)
 
