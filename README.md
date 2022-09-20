@@ -5,11 +5,15 @@
 
 ## Screenshots
 #### Desktop View
-![image1](/images/calc-demo.png)
+![](/images/rps-demo.png)
+
+![](/images/rps-demo-1.png)
+
+![](/images/rps-demo-2.png)
 #### Mobile View
-![image2](/images/calc-mob-demo.png)
+![](/images/rps-mob-demo.png)
+
+![](/images/rps-mob-1-demo.png)
 
 ## Description and Outcome
-This calculator performs all the necessary mathematical calculations. 
-I learned about event handling in this project, and how to write clean code with functions. 
-Build using vanilla JavaScript, CSS and HTML.
+A classic game of rock paper scissors against a computer. Build using vanilla JavaScript, CSS and HTML.
